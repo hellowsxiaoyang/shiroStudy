@@ -1,0 +1,29 @@
+package com.github.zhangkaitao.shiro.chapter6.realm;
+
+import com.github.zhangkaitao.shiro.chapter6.entity.User;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.realm.Realm;
+
+/**
+ * @author 杨郑耀
+ * @description
+ * @create 2019-06-14-21:53
+ */
+public class MyRealm3 implements Realm {
+	public String getName() {
+		return "c"; //realm name 为 “c”
+	}
+
+	public boolean supports(AuthenticationToken authenticationToken) {
+		return authenticationToken instanceof UsernamePasswordToken;
+	}
+
+	public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+		User user = new User("zhang", "123");
+		return new SimpleAuthenticationInfo(
+				user, //身份 User类型
+				"123",   //凭据
+				getName() //Realm Name
+		);
+	}
+}
